@@ -69,7 +69,7 @@ Note:
 为什么这么多公司都选择 redis 呢，和 redis 的功能类似的 也不少，比如 Memcached，简单来说，因为 redis 简单而且强大，Redis 是单线程的模型，而 Memcached 支持多线程，所以对于多核的单例来说，Memecached 的性能会好一点，但是 redis 的性能已经足够好了，在绝大多数情况下不会有性能瓶颈，除非是数据量太大，IO 会花费一些时间。而 Redis 3.0 推出之后，Memcached 几乎所以的功能都成了 redis 的子集，而且 redis 自带了集群功能，虽然还不够成熟。基本上 redis 的性能是非常好的，大多数操作的时间复杂度是常数，支持原子操作，支持事务，发布/订阅的功能，几乎所以流行的语言都有客户端，支持用 lua 做脚本
 
 %%%
-![compare](http://7xi5vu.com1.z0.glb.clouddn.com/2016-12-18/redis_memcached_mysql.png)
+![compare](https://knarfeh-1254074221.cos.na-siliconvalley.myqcloud.com/redis_memcached_mysql.png)
 
 Note:
 这张图是 Redis 和其他数据库的对比，基本上，Redis 3.0 推出之后，Memcached 几乎所以的功能都成了 redis 的子集，而且 redis 自带了集群功能，虽然还不够成熟。
@@ -473,7 +473,7 @@ Note:
 
 ### Replication
 
-![redis-master-slave](http://7xi5vu.com1.z0.glb.clouddn.com/redis-master-slave.jpg)
+![redis-master-slave](https://knarfeh-1254074221.cos.na-siliconvalley.myqcloud.com/redis-master-slave.jpg)
 
 Note:
 Redis 提供了复制（replication）的功能，可以实现当一台数据库中的数据更新后，自动将更新的数据同步到其他数据库上。 master 数据库可以进行读写操作，当写操作导致数据发生变化的时候，自动将数据同步给从数据库， slave 数据库一般是只读的。一个主数据库可以有多个从数据库，从数据库只能有一个主数据库。从数据库不仅可以接收主数据库的同步数据，自己也可以作为主数据库。需要特别注意的是：开启了复制功能，并且主数据库关闭持久化功能时，一定不要用 Supervisor 以及类似的进程工具自动重启主数据库，否则一旦进行了同步，所有的数据都会被清空。为了提高性能，一般从数据库会启用持久化，主数据库会禁用持久化，从数据库崩溃重启了，主数据库会把数据同步过来。主数据库崩溃了，如果是手工通过从数据库恢复，需要严格按照两个步骤进行:  
@@ -505,7 +505,7 @@ Note:
 
 %%%
 
-![twemproxy](http://7xi5vu.com1.z0.glb.clouddn.com/twemproxy.jpg)
+![twemproxy](https://knarfeh-1254074221.cos.na-siliconvalley.myqcloud.com/twemproxy.jpg)
 
 Note:
 Twemproxy的优点是：  
@@ -520,7 +520,7 @@ Twemproxy的优点是：
 
 %%%
 
-![redis-cluster-workflow](http://7xi5vu.com1.z0.glb.clouddn.com/redis-cluster-workflow.jpg)
+![redis-cluster-workflow](https://knarfeh-1254074221.cos.na-siliconvalley.myqcloud.com/redis-cluster-workflow.jpg)
 
 Note:
 Redis 的工作模式如图，Redis 集群使用数据分片（sharding）而非一致性哈希（consistency hashing）来实现： 一个 Redis 集群包含 16384 个哈希槽（hash slot）， 数据库中的每个键都属于这 16384 个哈希槽的其中一个， 集群使用公式 CRC16(key) % 16384 来计算键 key 属于哪个槽， 其中 CRC16(key) 语句用于计算键 key 的 CRC16 校验和 。如果用户将新节点 D 添加到集群中， 那么集群只需要将节点 A 、B 、 C 中的某些槽移动到节点 D 就可以了。因为将一个哈希槽从一个节点移动到另一个节点不会造成节点阻塞， 所以无论是添加新节点还是移除已存在节点， 又或者改变某个节点包含的哈希槽数量， 都不会造成集群下线。 我们这里假设1负责处理 0 号至 5500 号哈希槽，2负责处理 5501 号至 11000 号哈希槽，3负责处理 11001 号至 16384 号哈希槽。如果节点 2 下线了， 那么集群将无法正常运行， 因为集群找不到节点来处理 5501 号至 11000 号的哈希槽。另一方面， Redis 集群对节点使用了主从复制功能，我们可以给2号设置一个从节点，这种情况就跟 replication 的情况一样了，如果节点 2号的 master 和 slave 都下线，Redis 集群还是会停止工作。 
@@ -539,7 +539,7 @@ Note:
 
 %%% 
 
-![example](http://7xi5vu.com1.z0.glb.clouddn.com/2016-12-13/lizi.jpg)
+![example](https://knarfeh-1254074221.cos.na-siliconvalley.myqcloud.com/lizi.jpg)
 
 %%%
 
@@ -651,7 +651,7 @@ Redis 可以当做队列使用。github 的 resque 就是基于 redis 实现的�
 * website
 
 %%% 
-[![Redis 入门指南](https://img5.doubanio.com/lpic/s28104066.jpg)](https://book.douban.com/subject/26419240/)
+[![Redis 入门指南](https://img3.doubanio.com/view/subject/l/public/s28104066.jpg)](https://book.douban.com/subject/26419240/)
 
 %%%
 
